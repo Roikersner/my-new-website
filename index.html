@@ -1,1 +1,572 @@
-"<h1>Hello World</h1>" 
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>רועי קרשנר | ייעוץ עסקי בכלי AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            electric: '#00D4FF',
+            neon: '#39FF14',
+            dark: {
+              900: '#050810',
+              800: '#0a0e1a',
+              700: '#0f1525',
+              600: '#161e35',
+              500: '#1e2a45',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #00D4FF 0%, #39FF14 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .card-hover {
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 212, 255, 0.1);
+    }
+    .card-hover:hover {
+      border-color: rgba(0, 212, 255, 0.5);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+      transform: translateY(-4px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00D4FF, #0099bb);
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 35px rgba(0, 212, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(0, 212, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      border-color: #00D4FF;
+      background: rgba(0, 212, 255, 0.1);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0, 212, 255, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(57, 255, 20, 0.06) 0%, transparent 60%),
+        #050810;
+    }
+
+    .section-bg {
+      background: linear-gradient(180deg, #050810 0%, #0a0e1a 50%, #050810 100%);
+    }
+
+    .grid-pattern {
+      background-image:
+        linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.02));
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00D4FF, #39FF14);
+      transition: width 0.3s;
+    }
+    .nav-link:hover::after { width: 100%; }
+    .nav-link:hover { color: #00D4FF; }
+
+    .service-icon {
+      background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,212,255,0.05));
+      border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+
+    .benefit-num {
+      background: linear-gradient(135deg, #00D4FF, #39FF14);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    input, textarea, select {
+      background: rgba(255,255,255,0.04) !important;
+      border: 1px solid rgba(0,212,255,0.2) !important;
+      color: #e2e8f0 !important;
+      transition: all 0.3s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none !important;
+      border-color: #00D4FF !important;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.2) !important;
+    }
+    input::placeholder, textarea::placeholder { color: #4a5568 !important; }
+    select option { background: #0a0e1a; }
+
+    .tag {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+      color: #00D4FF;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body class="bg-dark-900 text-gray-200 font-sans antialiased overflow-x-hidden">
+
+  <!-- ─── NAV ─── -->
+  <nav class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-dark-900/80 border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="text-xl font-bold gradient-text tracking-tight">
+        רועי קרשנר<span class="text-white/30 font-light"> | AI</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+        <a href="#services" class="nav-link">שירותים</a>
+        <a href="#benefits" class="nav-link">למה AI?</a>
+        <a href="#about" class="nav-link">אודות</a>
+        <a href="#contact" class="btn-primary text-white text-sm font-semibold px-5 py-2.5 rounded-lg">
+          קביעת פגישה
+        </a>
+      </div>
+      <button id="menuBtn" class="md:hidden text-gray-400 hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-white/5 bg-dark-800/95 backdrop-blur-md">
+      <div class="flex flex-col gap-1 px-6 py-4 text-sm font-medium text-gray-400">
+        <a href="#services" class="py-2 hover:text-white transition-colors" onclick="closeMobile()">שירותים</a>
+        <a href="#benefits" class="py-2 hover:text-white transition-colors" onclick="closeMobile()">למה AI?</a>
+        <a href="#about"    class="py-2 hover:text-white transition-colors" onclick="closeMobile()">אודות</a>
+        <a href="#contact"  class="mt-2 btn-primary text-center text-white font-semibold px-5 py-2.5 rounded-lg" onclick="closeMobile()">
+          קביעת פגישה
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section id="hero" class="hero-bg grid-pattern min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-16 relative overflow-hidden">
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-electric/5 blur-3xl pointer-events-none animate-pulse-slow"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-neon/5 blur-3xl pointer-events-none animate-pulse-slow" style="animation-delay:2s"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <span class="tag inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium mb-8">
+        <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
+        ייעוץ AI לעסקים · 2026
+      </span>
+
+      <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
+        הפוך את ה-AI<br/>
+        <span class="gradient-text">למנוע הצמיחה</span><br/>
+        של העסק שלך
+      </h1>
+
+      <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10">
+        אני עוזר לעסקים לחסוך עשרות שעות עבודה בחודש ולהגדיל רווחיות —
+        על ידי הטמעת כלי AI חכמים, אוטומציות מדויקות, וסוכנים אוטונומיים שעובדים בשבילך 24/7.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contact" class="btn-primary text-white font-bold text-base px-8 py-4 rounded-xl inline-flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          קביעת פגישת ייעוץ חינם
+        </a>
+        <a href="#services" class="btn-outline text-gray-300 font-semibold text-base px-8 py-4 rounded-xl inline-flex items-center justify-center gap-2">
+          גלה את השירותים
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto mt-16">
+        <div class="stat-card rounded-2xl p-4 md:p-6">
+          <div class="text-2xl md:text-4xl font-black gradient-text">60%</div>
+          <div class="text-gray-500 text-xs md:text-sm mt-1">חיסכון בזמן תפעולי</div>
+        </div>
+        <div class="stat-card rounded-2xl p-4 md:p-6">
+          <div class="text-2xl md:text-4xl font-black gradient-text">3×</div>
+          <div class="text-gray-500 text-xs md:text-sm mt-1">מהירות תהליכים</div>
+        </div>
+        <div class="stat-card rounded-2xl p-4 md:p-6">
+          <div class="text-2xl md:text-4xl font-black gradient-text">ROI</div>
+          <div class="text-gray-500 text-xs md:text-sm mt-1">תוצאות ב-90 יום</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#services" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-gray-600 hover:text-electric transition-colors animate-float">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- ─── SERVICES ─── -->
+  <section id="services" class="section-bg py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <span class="tag inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-4">השירותים שלי</span>
+        <h2 class="text-4xl md:text-5xl font-black mb-4">מה אני מציע</h2>
+        <p class="text-gray-500 text-lg max-w-xl mx-auto">פתרונות AI מותאמים אישית לכל גודל עסק — מסטארטאפ ועד תאגיד</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Service 1 -->
+        <div class="card-hover reveal bg-dark-700/60 rounded-2xl p-8 backdrop-blur-sm">
+          <div class="service-icon w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">הטמעת AI בארגון</h3>
+          <p class="text-gray-500 leading-relaxed mb-6">
+            אבחון תהליכים קיימים, בחירת הכלים הנכונים, ואינטגרציה חלקה עם המערכות הקיימות — ללא הפרעה לעבודה השוטפת.
+          </p>
+          <ul class="space-y-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-electric shrink-0"></span>מיפוי תהליכים ובחירת כלים</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-electric shrink-0"></span>הדרכת הצוות והתאמה ארגונית</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-electric shrink-0"></span>מדידת ROI ואופטימיזציה שוטפת</li>
+          </ul>
+        </div>
+
+        <!-- Service 2 — Featured -->
+        <div class="card-hover reveal bg-dark-700/60 rounded-2xl p-8 backdrop-blur-sm relative overflow-hidden border border-electric/25"
+             style="box-shadow: 0 0 40px rgba(0,212,255,0.08); transition-delay:0.1s">
+          <div class="absolute top-4 left-4">
+            <span class="bg-electric text-dark-900 text-xs font-bold px-3 py-1 rounded-full">הכי פופולרי</span>
+          </div>
+          <div class="service-icon w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">סדנאות Generative AI</h3>
+          <p class="text-gray-500 leading-relaxed mb-6">
+            סדנאות מעשיות לצוותים — מ-Prompt Engineering בסיסי ועד שימוש מתקדם ב-ChatGPT, Claude, Gemini וכלי ה-AI המובילים ב-2026.
+          </p>
+          <ul class="space-y-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-neon shrink-0"></span>סדנאות מותאמות לתפקיד ולתעשייה</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-neon shrink-0"></span>תרגולים מעשיים בזמן אמת</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-neon shrink-0"></span>חומרי לימוד וליווי לאחר הסדנה</li>
+          </ul>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="card-hover reveal bg-dark-700/60 rounded-2xl p-8 backdrop-blur-sm" style="transition-delay:0.2s">
+          <div class="service-icon w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">בניית סוכני AI אוטונומיים</h3>
+          <p class="text-gray-500 leading-relaxed mb-6">
+            פיתוח סוכני AI מותאמים שמבצעים משימות מורכבות ברקע — שירות לקוחות, ניתוח נתונים, ניהול לידים ועוד.
+          </p>
+          <ul class="space-y-2 text-sm text-gray-500">
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-electric shrink-0"></span>סוכנים לשירות לקוחות 24/7</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-electric shrink-0"></span>אוטומציות מבוססות n8n / Make</li>
+            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-electric shrink-0"></span>אינטגרציה עם CRM ומערכות קיימות</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BENEFITS ─── -->
+  <section id="benefits" class="py-24 px-6 bg-dark-900 relative overflow-hidden">
+    <div class="absolute inset-0 grid-pattern opacity-50 pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-electric/5 blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-16 reveal">
+        <span class="tag inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-4">למה AI ב-2026?</span>
+        <h2 class="text-4xl md:text-5xl font-black mb-4">
+          עסקים שלא משתמשים ב-AI<br/>
+          <span class="gradient-text">כבר מפסידים ביג-טיים</span>
+        </h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+          ב-2026, AI הוא כבר לא "nice-to-have" — הוא תנאי הכרחי לתחרותיות. הנה למה:
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 mb-16">
+        <div class="flex gap-6 items-start reveal">
+          <span class="benefit-num text-5xl font-black leading-none shrink-0">01</span>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">חיסכון דרמטי בזמן</h3>
+            <p class="text-gray-500 leading-relaxed">
+              תהליכים שלקחו שעות מתבצעים בדקות. ניתוח דוחות, כתיבת תוכן, מענה ללקוחות, תיאום לו"ז — כולם אוטומטיים. הצוות שלך מתפנה לעבודה יצירתית ואסטרטגית.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start reveal" style="transition-delay:0.1s">
+          <span class="benefit-num text-5xl font-black leading-none shrink-0">02</span>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">הפחתת עלויות תפעוליות</h3>
+            <p class="text-gray-500 leading-relaxed">
+              לקוחותי חוסכים בממוצע 15,000–40,000 ₪ בחודש על עבודות חוזרות. כלי AI עולים שבריר ממה שעולה עובד במשרה מלאה, ועובדים ללא הפסקה.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start reveal" style="transition-delay:0.15s">
+          <span class="benefit-num text-5xl font-black leading-none shrink-0">03</span>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">יתרון תחרותי מיידי</h3>
+            <p class="text-gray-500 leading-relaxed">
+              עסקים שכבר אימצו AI מגיבים לשוק 3 פעמים מהר יותר, מספקים חוויית לקוח עדיפה, ומנצחים במכרזים — כי הם יכולים להציע יותר בפחות.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-6 items-start reveal" style="transition-delay:0.2s">
+          <span class="benefit-num text-5xl font-black leading-none shrink-0">04</span>
+          <div>
+            <h3 class="text-xl font-bold text-white mb-2">החלטות מבוססות נתונים</h3>
+            <p class="text-gray-500 leading-relaxed">
+              סוכני AI מנתחים בזמן אמת מכירות, טרנדים, ומשוב לקוחות — ומספקים תובנות שמנכ"לים עד היום קיבלו רק בישיבות רבעוניות יקרות.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="reveal bg-dark-600/50 border border-electric/20 rounded-2xl p-8 md:p-10 text-center max-w-3xl mx-auto backdrop-blur-sm">
+        <svg class="w-10 h-10 text-electric/40 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <p class="text-gray-300 text-lg md:text-xl leading-relaxed font-medium mb-4">
+          "AI לא יחליף את העובדים שלך — אבל עסק שמשתמש ב-AI יחליף את העסק שלא משתמש."
+        </p>
+        <span class="text-electric text-sm font-medium">— הפילוסופיה שמובילה את העבודה שלי</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─── -->
+  <section id="about" class="section-bg py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+
+        <!-- Visual -->
+        <div class="order-2 md:order-1 relative reveal">
+          <div class="relative w-full max-w-sm mx-auto">
+            <div class="relative z-10 w-64 h-64 md:w-80 md:h-80 mx-auto rounded-3xl overflow-hidden border-2 border-electric/30"
+                 style="box-shadow: 0 0 60px rgba(0,212,255,0.2)">
+              <div class="w-full h-full bg-dark-600 flex items-center justify-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-electric/20 via-transparent to-neon/10"></div>
+                <svg class="w-32 h-32 text-electric/60 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="0.75"
+                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2M12 3v4m0 0l2-2m-2 2L10 5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="absolute -top-4 -right-4 tag text-xs px-3 py-2 rounded-xl font-medium animate-float">
+              🤖 Claude · GPT · Gemini
+            </div>
+            <div class="absolute -bottom-4 -left-4 tag text-xs px-3 py-2 rounded-xl font-medium animate-float" style="animation-delay:1s">
+              ⚡ n8n · Make · Zapier
+            </div>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="order-1 md:order-2 reveal" style="transition-delay:0.15s">
+          <span class="tag inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-6">אודות</span>
+          <h2 class="text-4xl md:text-5xl font-black mb-6">
+            מי אני ולמה<br/>
+            <span class="gradient-text">לסמוך עלי</span>
+          </h2>
+          <div class="space-y-4 text-gray-400 leading-relaxed">
+            <p>
+              שמי רועי קרשנר, יועץ AI עסקי עם ניסיון בהטמעת פתרונות בינה מלאכותית בעשרות חברות — מסטארטאפים בשלבים מוקדמים ועד ארגונים עם מאות עובדים.
+            </p>
+            <p>
+              הגישה שלי פרקטית: אני לא מוכר "חלומות AI" — אני מזהה את התהליכים שיחזירו לך את ההשקעה תוך 90 יום, ומיישם אותם עם הצוות שלך.
+            </p>
+            <p>
+              עבדתי עם חברות בתחומי פינטק, קמעונאות, שירותים מקצועיים וטכנולוגיה. כולן ראו תוצאות מדידות — שעות עבודה שנחסכו, עלויות שירדו, וצוותים שהפכו ל-"super-powered".
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-8">
+            <span class="tag text-xs px-3 py-1.5 rounded-lg">Prompt Engineering</span>
+            <span class="tag text-xs px-3 py-1.5 rounded-lg">AI Agents</span>
+            <span class="tag text-xs px-3 py-1.5 rounded-lg">LLM Integration</span>
+            <span class="tag text-xs px-3 py-1.5 rounded-lg">Process Automation</span>
+            <span class="tag text-xs px-3 py-1.5 rounded-lg">Change Management</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact" class="py-24 px-6 bg-dark-900 relative overflow-hidden">
+    <div class="absolute inset-0 grid-pattern opacity-50 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-electric/5 blur-3xl pointer-events-none rounded-full"></div>
+
+    <div class="max-w-2xl mx-auto relative z-10">
+      <div class="text-center mb-12 reveal">
+        <span class="tag inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-4">צור קשר</span>
+        <h2 class="text-4xl md:text-5xl font-black mb-4">מוכן להתחיל?</h2>
+        <p class="text-gray-500 text-lg">
+          שלח הודעה ואחזור אליך תוך 24 שעות —
+          <span class="text-electric font-semibold">ללא עלות וללא התחייבות.</span>
+        </p>
+      </div>
+
+      <form id="contactForm" class="reveal bg-dark-700/60 backdrop-blur-sm border border-white/5 rounded-3xl p-8 md:p-10 space-y-5"
+            onsubmit="handleSubmit(event)">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-2">שם מלא *</label>
+            <input type="text" placeholder="ישראל ישראלי" required class="w-full px-4 py-3 rounded-xl text-sm" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-2">חברה</label>
+            <input type="text" placeholder="שם החברה שלך" class="w-full px-4 py-3 rounded-xl text-sm" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-2">אימייל *</label>
+          <input type="email" placeholder="your@email.com" required class="w-full px-4 py-3 rounded-xl text-sm" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-2">מה מעניין אותך?</label>
+          <select class="w-full px-4 py-3 rounded-xl text-sm">
+            <option value="">בחר שירות</option>
+            <option value="implementation">הטמעת AI בארגון</option>
+            <option value="workshop">סדנאות Generative AI</option>
+            <option value="agents">בניית סוכני AI</option>
+            <option value="consultation">ייעוץ כללי</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-2">ספר לי קצת על העסק שלך</label>
+          <textarea rows="4" placeholder="מה העסק עושה, איפה אתה רוצה לשפר, כמה עובדים..."
+                    class="w-full px-4 py-3 rounded-xl text-sm resize-none"></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full text-white font-bold text-base py-4 rounded-xl flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+          </svg>
+          שלח ותיאום פגישה
+        </button>
+      </form>
+
+      <div id="successMsg" class="hidden text-center py-12">
+        <div class="w-16 h-16 rounded-full bg-electric/10 border border-electric/30 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-2">ההודעה נשלחה!</h3>
+        <p class="text-gray-500">תודה — אחזור אליך תוך 24 שעות לתיאום שיחה.</p>
+      </div>
+
+      <p class="text-center text-gray-600 text-sm mt-8">
+        מעדיף לדבר ישירות?
+        <a href="tel:+972501234567" class="text-electric hover:underline font-medium">050-123-4567</a>
+        ·
+        <a href="mailto:roi@example.com" class="text-electric hover:underline font-medium">roi@example.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="bg-dark-800 border-t border-white/5 py-8 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-600">
+      <div class="font-semibold gradient-text">רועי קרשנר | ייעוץ AI עסקי</div>
+      <div>© 2026 כל הזכויות שמורות</div>
+      <div class="flex gap-6">
+        <a href="#services" class="hover:text-electric transition-colors">שירותים</a>
+        <a href="#benefits" class="hover:text-electric transition-colors">למה AI?</a>
+        <a href="#contact"  class="hover:text-electric transition-colors">צור קשר</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function closeMobile() {
+      document.getElementById('mobileMenu').classList.add('hidden');
+    }
+
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('successMsg').classList.remove('hidden');
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
